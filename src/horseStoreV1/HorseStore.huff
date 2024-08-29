@@ -1,0 +1,9 @@
+#define macro MAIN() = takes(0) returns(0) {
+    0x00             // [0]   <-- stack
+    //0x02             // TOP->[2,0]<-BOTTOM
+    calldataload    // [CALLDATA]   <-- stack
+    //How to fetch function selector?
+    0xE0            // [0xe0, calldata (32)]     This is the number of bytes to shift right
+    shr             // [function_selector  ]  this is the shift right opcode
+
+} 
