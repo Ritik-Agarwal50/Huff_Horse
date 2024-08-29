@@ -6,4 +6,31 @@
     0xE0            // [0xe0, calldata (32)]     This is the number of bytes to shift right
     shr             // [function_selector  ]  this is the shift right opcode
 
+    //jump -> function data associated with the selector
+    // If f_select ==updateHorsr -> jump to that code
+    //if f_select == getHorse -> jump to that code
+
+    //0xcdfead2e --> update
+    // 0xe026c017 --> read
+    dup1            // [function_selector, function_selector]  <-- stack
+    0xcdfead2e     // [0xcdfead2e, function_selector, function_selector]  <-- stack
+    eq            // [trie_if_func_selctor_matches,function_selector]  <-- stack
+
+    updateJump      // [updateHorseNumberProgramCounter, true/false,function_selector]  <-- stack
+    jumpi           //[function_selector,]
+
+    0xe026c017    // [0xe026c017, function_selector]  <-- stack
+    eq           // [trie_if_func_selctor_matches,function_selector]  <-- stack
+    readJump      // [readHorseNumberProgramCounter, true/false,function_selector]  <-- stack
+    jumpi           //[]
+
+    updateJump:
+        SET_NUMBER_OF_HORSE()
+
+    readJump:
+        GET_NUMBER_OF_HORSE()
 } 
+
+#define macro SET_NUMBER_OF_HORSE() = takes(0) returns(0) {}
+
+#define macro GET_NUMBER_OF_HORSE() = takes(0) returns(0) {}
