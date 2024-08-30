@@ -1,7 +1,7 @@
 //Interface
 //This will help you extract func sig without doing cast
 #define function updateHorseNumber(uint256) nonpayable returns()
-#define function getHorseNumber() view returns(uint256)
+#define function readNumberOfHorses() view returns(uint256)
 
 //it will place the it to 0th slot
 //ita a type of a counter
@@ -31,7 +31,7 @@
     jumpi           //[function_selector,]
 
     //0xe026c017    // [0xe026c017, function_selector]  <-- stack
-    __FUNC_SIG(getHorseNumber)     // [0xe026c017, function_selector]  <-- stack
+    __FUNC_SIG(readNumberOfHorses)     // [0xe026c017, function_selector]  <-- stack
     eq           // [trie_if_func_selctor_matches,function_selector]  <-- stack
     readJump      // [readHorseNumberProgramCounter, true/false,function_selector]  <-- stack
     jumpi           //[]
